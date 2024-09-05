@@ -1,2 +1,3 @@
 ---
-# vars file for overbase.mysql
+# vars file for rostyslav.mysql
+mysql_version: "8.4"
