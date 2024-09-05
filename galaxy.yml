@@ -1,19 +1,19 @@
 ---
 namespace: rostyslav
 name: mysql
-version: 1.0.0
+version: 1.0.2
 readme: README.md
 authors:
   - Rostyslav Rava
-description: OverBase MySQL collection
+description: MySQL Ansible Collection by Rostyslav Rava
 license_file: LICENSE
 tags:
   - database
   - mysql
-repository: https://github.com/overbase/overbase.mysql
-documentation: https://github.com/overbase/overbase.mysql
-homepage: https://github.com/overbase/overbase.mysql
-issues: https://github.com/overbase/overbase.mysql/issues
+repository: https://github.com/rostyslav/rostyslav.mysql
+documentation: https://github.com/rostyslav/rostyslav.mysql
+homepage: https://github.com/rostyslav/rostyslav.mysql
+issues: https://github.com/rostyslav/rostyslav.mysql/issues
 build_ignore:
   - .gitignore
   - changelogs/.plugin-cache.yaml
