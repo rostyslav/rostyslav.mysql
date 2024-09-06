@@ -1,3 +1,7 @@
 ---
-
+- name: Import Oracle MySQL GPG key
+  apt_key:
+    url: https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
+    state: present
+  when: ansible_distribution == 'Ubuntu'
 
