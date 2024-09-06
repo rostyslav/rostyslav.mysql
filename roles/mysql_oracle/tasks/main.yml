@@ -6,7 +6,6 @@
   when: ansible_distribution == 'Ubuntu'
 
 - name: Import Oracle MySQL GPG key
-  become: true
   command: |
     cat /tmp/RPM-GPG-KEY-mysql-2023 | gpg -o /usr/share/keyrings/mysql-apt-config.gpg --dearmor
   when: ansible_distribution == 'Ubuntu'
