@@ -31,6 +31,7 @@ jobs:
 
     - name: Check Molecule version
       run: |
+        cd roles/mysql_oracle
         molecule --version
 
     - name: Run Molecule tests
