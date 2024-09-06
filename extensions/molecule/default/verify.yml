@@ -6,3 +6,11 @@
       ansible.builtin.include_role:
         name: ../../../../roles/mysql_oracle
         tasks_from: init
+    - name: Check if MySQL Oracle GPG key exists
+      stat:
+        path: /tmp/RPM-GPG-KEY-mysql-2023
+      register: rpm_gpg_key_mysql_2023
+    - name: Assert that the MySQL Oracle GPG key exists
+      assert:
+        that:
+          - rpm_gpg_key_mysql_2023.stat.exists
