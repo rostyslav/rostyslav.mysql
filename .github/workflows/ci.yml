@@ -35,5 +35,4 @@ jobs:
 
     - name: Run Molecule tests
       run: |
-        cd molecule/default
         molecule test
