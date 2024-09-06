@@ -13,6 +13,7 @@
     creates: /usr/share/keyrings/mysql-apt-config.gpg
 
 - name: Adding the Oracle MySQL APT Repository for Ubuntu 24.04
+  become: true
   copy:
     dest: /etc/apt/sources.list.d/mysql.list
     content: |
