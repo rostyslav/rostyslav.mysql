@@ -25,3 +25,4 @@
     update_cache: yes
   become: true
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
+  changed_when: false
