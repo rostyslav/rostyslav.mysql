@@ -4,4 +4,3 @@
     url: https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
     state: present
   when: ansible_distribution == 'Ubuntu'
-

@@ -1,0 +1,9 @@
+---
+- name: Test MySQL Oracle role on Ubuntu 24.04
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Include MySQL Oracle role
+      ansible.builtin.include_role:
+        name: rostyslav.mysql_oracle
+        tasks_from: main.yml
