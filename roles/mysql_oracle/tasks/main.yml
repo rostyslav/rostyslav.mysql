@@ -7,8 +7,6 @@
 
 - name: Import Oracle MySQL GPG key
   become: true
-  debug:
-    msg: "Importing Oracle MySQL GPG key"
   command: |
-    gpg --no-default-keyring --keyring /usr/share/keyrings/mysql-keyring.gpg --import /tmp/RPM-GPG-KEY-mysql-2023
+    cat /tmp/RPM-GPG-KEY-mysql-2023 | gpg -o /usr/share/keyrings/mysql-apt-config.gpg --dearmor
   when: ansible_distribution == 'Ubuntu'
