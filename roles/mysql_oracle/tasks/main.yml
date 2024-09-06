@@ -19,3 +19,9 @@
     content: |
       deb [signed-by=/usr/share/keyrings/mysql-apt-config.gpg] https://repo.mysql.com/apt/ubuntu/ noble mysql-8.4-lts
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
+
+- name: Update APT package index
+  apt:
+    update_cache: yes
+  become: true
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
