@@ -7,6 +7,7 @@
 
 - name: Import Oracle MySQL GPG key
   command: |
-    gpg --batch --yes --dearmor -o /usr/share/keyrings/mysql-apt-config.gpg /tmp/RPM-GPG-KEY-mysql-2023
+    gpg --batch --yes --dearmor -o /tmp/mysql-apt-config.gpg /tmp/RPM-GPG-KEY-mysql-2023
   when: ansible_distribution == 'Ubuntu'
-  creates: /usr/share/keyrings/mysql-apt-config.gpg
+  args:
+    creates: /tmp/mysql-apt-config.gpg
