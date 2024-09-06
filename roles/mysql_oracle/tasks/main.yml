@@ -1,6 +1,11 @@
 ---
-- name: Import Oracle MySQL GPG key
+- name: Get Oracle MySQL GPG key
   get_url:
     url: https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
     dest: /tmp/RPM-GPG-KEY-mysql-2023
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Import Oracle MySQL GPG key
+  command: | 
+    gpg --no-default-keyring --keyring /usr/share/keyrings/mysql-keyring.gpg --import /tmp/RPM-GPG-KEY-mysql-2023
   when: ansible_distribution == 'Ubuntu'
