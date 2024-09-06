@@ -5,8 +5,16 @@
     dest: /tmp/RPM-GPG-KEY-mysql-2023
   when: ansible_distribution == 'Ubuntu'
 
+- name: Check if Oracle MySQL GPG key is already imported
+  command: |
+    gpg --no-default-keyring --keyring /usr/share/keyrings/mysql-keyring.gpg --list-keys --with-colons | grep -q 'RPM-GPG-KEY-mysql-2023'
+  register: gpg_key_check
+  ignore_errors: true
+  changed_when: false
+  when: ansible_distribution == 'Ubuntu'
+
 - name: Import Oracle MySQL GPG key
   become: true
-  command: | 
+  command: |
     gpg --no-default-keyring --keyring /usr/share/keyrings/mysql-keyring.gpg --import /tmp/RPM-GPG-KEY-mysql-2023
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_distribution == 'Ubuntu' and gpg_key_check.rc != 0
