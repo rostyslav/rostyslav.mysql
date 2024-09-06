@@ -1,4 +1,4 @@
-name: MySQL CI
+name: Rostyslav MySQL CI
 
 on:
   push:

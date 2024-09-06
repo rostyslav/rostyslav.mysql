@@ -1,0 +1,14 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: delegated
+platforms:
+  - name: instance
+    image: ubuntu:24.04
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../playbooks/converge.yml
+verifier:
+  name: ansible
