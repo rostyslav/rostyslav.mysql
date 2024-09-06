@@ -1,0 +1,8 @@
+- name: Verify
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Initialize role MySQL Oracle without actually running it
+      ansible.builtin.include_role:
+        name: ../../../../roles/mysql_oracle
+        tasks_from: init
