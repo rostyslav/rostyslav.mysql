@@ -43,6 +43,16 @@
   register: mysql_root_password_file
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
 
+- name: Read MySQL root password
+  become: true
+  slurp:
+    src: /root/mysql-root-password.txt
+  register: mysql_root_password_txt
+
+- name: Display MySQL root password
+  debug:
+    msg: "File content is: {{ mysql_root_password_txt.content | b64decode }}"
+
 - name: Configure MySQL root password
   become: true
   shell: |
