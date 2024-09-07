@@ -51,6 +51,7 @@
     value: "{{ mysql_root_password_file.content }}"
     vtype: password
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
+  no_log: True
 
 - name: Re-specify MySQL root password
   become: true
@@ -60,6 +61,7 @@
     value: "{{ mysql_root_password_file.content }}"
     vtype: password
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
+  no_log: True
 
 - name: Install MySQL Server
   apt:
