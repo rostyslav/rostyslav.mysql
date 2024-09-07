@@ -59,7 +59,6 @@
     - name: Check if MySQL server is up and running
       service:
         name: mysql
-        state: started
       register: mysql_service
 
     - name: Assert that MySQL server is up and running
