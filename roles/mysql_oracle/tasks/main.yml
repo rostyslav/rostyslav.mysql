@@ -27,6 +27,11 @@
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
   changed_when: false
 
+- name: Check if file with generated MySQL password exists
+  stat:
+    path: /root/mysql-root-password.txt
+  register: mysql_root_password_check
+
 - name: Generate MySQL root password and save to file
   become: true
   shell: |
@@ -34,7 +39,7 @@
     echo -n $PASSWORD > /root/mysql-root-password.txt
   args:
     creates: /root/mysql-root-password.txt
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04' and not mysql_root_password_check.stat.exists
 
 - name: Read MySQL root password from file
   become: true
