@@ -46,3 +46,14 @@
       assert:
         that:
           - mysql_root_password.stat.exists
+
+    - name: Check if MySQL server is up and running
+      service:
+        name: mysql
+        state: started
+      register: mysql_service
+
+    - name: Assert that MySQL server is up and running
+      assert:
+        that:
+          - mysql_service.state == 'started'
