@@ -67,6 +67,15 @@
         that:
           - mysql_service.state == 'started'
 
+    - name: Read file content
+      slurp:
+        src: "{{ ansible_env.HOME }}/.my.cnf"
+      register: my_cnf
+
+    - name: Display file content
+      debug:
+        msg: "File content is: {{ my_cnf | b64decode }}"
+
     - name: Connect to MySQL server and get version
       command: mysql -N -s -e "SELECT VERSION();"
       register: mysql_version
