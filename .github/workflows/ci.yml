@@ -24,6 +24,9 @@ jobs:
       with:
         python-version: '3.11'
 
+    - name: Install debconf-utils
+      run: sudo apt-get install debconf-utils
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
