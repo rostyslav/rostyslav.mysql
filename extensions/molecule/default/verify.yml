@@ -46,6 +46,7 @@
           - mysql_apt_repository.stat.exists
 
     - name: Check if MySQL root password file exists
+      become: true
       stat:
         path: /root/mysql-root-password.txt
       register: mysql_root_password
