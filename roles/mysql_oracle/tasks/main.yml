@@ -21,42 +21,50 @@
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
 
 - name: Update APT package index
+  become: true
   apt:
     update_cache: yes
-  become: true
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
   changed_when: false
 
 - name: Generate MySQL root password and save to file
+  become: true
   shell: |
     PASSWORD=$(openssl rand -base64 12)
     echo $PASSWORD > /root/mysql-root-password.txt
-  become: true
   args:
     creates: /root/mysql-root-password.txt
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
 
 - name: Read MySQL root password from file
+  become: true
   slurp:
     src: /root/mysql-root-password.txt
   register: mysql_root_password_file
-  become: true
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
 
-- name: Specify MySQL root password
+- name: Configure MySQL root password
+  become: true
   shell: |
     PASSWORD=$(cat /root/mysql-root-password.txt)
     echo "mysql-community-server mysql-community-server/root-pass password $PASSWORD" | debconf-set-selections
     echo "mysql-community-server mysql-community-server/re-root-pass password $PASSWORD" | debconf-set-selections
-  become: true
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
   changed_when: false
 
 - name: Install MySQL Server
+  become: true
   apt:
     name: mysql-community-server
     state: present
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
+  changed_when: false
+
+- name: Install MySQL Client
   become: true
+  apt:
+    name: mysql-community-client
+    state: present
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
   changed_when: false
 
