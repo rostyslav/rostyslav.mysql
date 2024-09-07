@@ -52,6 +52,7 @@
     vtype: password
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
   no_log: True
+  changed_when: false
 
 - name: Re-specify MySQL root password
   become: true
@@ -62,6 +63,7 @@
     vtype: password
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
   no_log: True
+  changed_when: false
 
 - name: Install MySQL Server
   apt:
