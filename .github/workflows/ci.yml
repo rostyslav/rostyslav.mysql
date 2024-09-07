@@ -39,4 +39,4 @@ jobs:
     - name: Run Molecule tests
       run: |
         cd extensions
-        molecule test --debug
+        molecule --debug test
