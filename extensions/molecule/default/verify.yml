@@ -72,7 +72,7 @@
 
     - name: Display file content
       debug:
-        msg: "File content is: {{ my_cnf | b64decode }}"
+        msg: "File content is: {{ my_cnf }}"
 
     - name: Connect to MySQL server and get version
       command: mysql -N -s -e "SELECT VERSION();"
