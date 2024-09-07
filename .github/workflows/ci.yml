@@ -34,7 +34,7 @@ jobs:
 
     - name: Check Molecule version
       run: |
-        molecule --version
+        molecule --version --debug
 
     - name: Run Molecule tests
       run: |
