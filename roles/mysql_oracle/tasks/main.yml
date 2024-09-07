@@ -26,3 +26,10 @@
   become: true
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
   changed_when: false
+
+- name: Generate MySQL root password and save to file
+  shell: |
+    PASSWORD=$(openssl rand -base64 12)
+    echo $PASSWORD > /root/mysql-root-password.txt
+  become: true
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
