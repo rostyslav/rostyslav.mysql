@@ -28,6 +28,7 @@
   changed_when: false
 
 - name: Check if file with generated MySQL password exists
+  become: true
   stat:
     path: /root/mysql-root-password.txt
   register: mysql_root_password_check
