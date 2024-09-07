@@ -68,6 +68,4 @@
       host     = localhost
       user     = root
       password = {{ mysql_root_password_file.content }}
-  args:
-    creates: .my.cnf
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
