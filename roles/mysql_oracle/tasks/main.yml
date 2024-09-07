@@ -81,7 +81,7 @@
 - name: Read MySQL log file
   become: true
   slurp:
-    src: /var/lib/mysql/error.log
+    src: /var/log/mysql/error.log
   register: mysql_log
 
 - name: Display MySQL log file
