@@ -39,8 +39,8 @@
 - name: Specify MySQL root password
   shell: |
     PASSWORD=$(cat /root/mysql-root-password.txt)
-    debconf-set-selections <<< "mysql-community-server mysql-community-server/root-pass password $PASSWORD"
-    debconf-set-selections <<< "mysql-community-server mysql-community-server/re-root-pass password $PASSWORD"
+    echo "mysql-community-server mysql-community-server/root-pass password $PASSWORD" | debconf-set-selections
+    echo "mysql-community-server mysql-community-server/re-root-pass password $PASSWORD" | debconf-set-selections
   become: true
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
 
