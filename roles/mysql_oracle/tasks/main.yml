@@ -32,4 +32,6 @@
     PASSWORD=$(openssl rand -base64 12)
     echo $PASSWORD > /root/mysql-root-password.txt
   become: true
+  args:
+    creates: /root/mysql-root-password.txt
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
