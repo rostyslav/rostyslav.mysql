@@ -68,6 +68,10 @@
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
   changed_when: false
 
+- name: Debug output for user MySQL configuration location
+  debug:
+    msg: "{{ ansible_env.HOME }}/.my.cnf"
+
 - name: Configure MySQL for current user
   copy:
     dest: "{{ ansible_env.HOME }}/.my.cnf"
