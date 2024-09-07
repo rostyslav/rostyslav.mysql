@@ -2,6 +2,15 @@
   hosts: localhost
   become: true
   tasks:
+
+    - name: Get current user name
+      ansible.builtin.command: whoami
+      register: current_user
+
+    - name: Display current user name
+      ansible.builtin.debug:
+        msg: "Current user is {{ current_user.stdout }}"
+
     - name: Initialize role MySQL Oracle without actually running it
       ansible.builtin.include_role:
         name: ../../../../roles/mysql_oracle
