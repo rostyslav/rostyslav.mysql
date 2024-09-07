@@ -1,6 +1,5 @@
 - name: Verify
   hosts: localhost
-  become: true
   tasks:
 
     - name: Get current user name
