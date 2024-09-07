@@ -31,7 +31,7 @@
   become: true
   shell: |
     PASSWORD=$(openssl rand -base64 12)
-    echo $PASSWORD > /root/mysql-root-password.txt
+    echo -n $PASSWORD > /root/mysql-root-password.txt
   args:
     creates: /root/mysql-root-password.txt
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
@@ -100,5 +100,5 @@
       [client]
       host     = 127.0.0.1
       user     = root
-      password = "{{ mysql_root_password_file.content | b64decode | trim }}"
+      password = "{{ mysql_root_password_file.content | b64decode}}"
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
