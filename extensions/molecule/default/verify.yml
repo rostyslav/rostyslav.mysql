@@ -57,14 +57,13 @@
           - mysql_root_password.stat.exists
 
     - name: Check if MySQL server is up and running
-      service:
-        name: mysql
+      shell: systemctl is-active mysql
       register: mysql_service
 
-    - name: Assert that MySQL server is up and running
+    - name: Assert that MySQL server is active
       assert:
         that:
-          - mysql_service.state == 'started'
+          - mysql_service.stdout == 'active'
 
     - name: Read file content
       slurp:
