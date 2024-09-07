@@ -36,12 +36,27 @@
     creates: /root/mysql-root-password.txt
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
 
-- name: Specify MySQL root password
-  shell: |
-    PASSWORD=$(cat /root/mysql-root-password.txt)
-    echo "mysql-community-server mysql-community-server/root-pass password $PASSWORD" | debconf-set-selections
-    echo "mysql-community-server mysql-community-server/re-root-pass password $PASSWORD" | debconf-set-selections
+- name: Read MySQL root password from file
+  slurp:
+    src: /root/mysql-root-password.txt
+  register: mysql_root_password_file
   become: true
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
+
+- name: Specify MySQL root password
+  debconf:
+    name: mysql-community-server
+    question: mysql-community-server/root-pass
+    value: "{{ mysql_root_password_file.content }}"
+    vtype: password
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
+
+- name: Specify MySQL root password
+  debconf:
+    name: mysql-community-server
+    question: mysql-community-server/re-root-pass
+    value: "{{ mysql_root_password_file.content }}"
+    vtype: password
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
 
 - name: Install MySQL Server
