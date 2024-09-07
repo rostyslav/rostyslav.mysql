@@ -69,10 +69,12 @@
   changed_when: false
 
 - name: Debug output for user MySQL configuration location
+  become: true
   debug:
     msg: "{{ ansible_env.HOME }}/.my.cnf"
 
 - name: Configure MySQL for current user
+  become: true
   copy:
     dest: "{{ ansible_env.HOME }}/.my.cnf"
     content: |
