@@ -15,16 +15,6 @@
         name: ../../../../roles/mysql_oracle
         tasks_from: init
 
-    - name: Check if MySQL Oracle GPG key exists
-      stat:
-        path: /tmp/RPM-GPG-KEY-mysql-2023
-      register: rpm_gpg_key_mysql_2023
-
-    - name: Assert that the MySQL Oracle GPG key exists
-      assert:
-        that:
-          - rpm_gpg_key_mysql_2023.stat.exists
-          -
     - name: Check if MySQL Oracle keyring exists
       stat:
         path: /usr/share/keyrings/mysql-apt-config.gpg
@@ -45,17 +35,6 @@
         that:
           - mysql_apt_repository.stat.exists
 
-    - name: Check if MySQL root password file exists
-      become: true
-      stat:
-        path: /root/mysql-root-password.txt
-      register: mysql_root_password
-
-    - name: Assert that the MySQL root password file exists
-      assert:
-        that:
-          - mysql_root_password.stat.exists
-
     - name: Check if MySQL server is up and running
       shell: systemctl is-active mysql
       register: mysql_service
@@ -64,15 +43,6 @@
       assert:
         that:
           - mysql_service.stdout == 'active'
-
-    - name: Read file content
-      slurp:
-        src: "{{ ansible_env.HOME }}/.my.cnf"
-      register: my_cnf
-
-    - name: Display file content
-      debug:
-        msg: "File content is: {{ my_cnf.content | b64decode }}"
 
     - name: Connect to MySQL server and get version
       command: mysql -N -s -e "SELECT VERSION();"

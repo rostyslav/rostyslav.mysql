@@ -31,6 +31,7 @@
 - name: Generate MySQL root password
   command: openssl rand -base64 12
   register: root_pass
+  changed_when: false
 
 - name: Set the MySQL root password as a fact
   set_fact:
@@ -82,6 +83,7 @@
       user     = root
       password = "{{my_root_pass}}"
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
+  changed_when: false
 
 - name: Debug output for user MySQL configuration location
   become: true
