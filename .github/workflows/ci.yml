@@ -19,6 +19,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Uninstall MySQL 8.0
+      run: |
+        sudo systemctl stop mysql
+        sudo apt-get remove --purge mysql-server mysql-client mysql-common -y
+        sudo apt-get autoremove -y
+        sudo apt-get autoclean
+        sudo rm -rf /etc/mysql /var/lib/mysql
+        sudo rm -rf /var/log/mysql /var/log/mysql.*
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
