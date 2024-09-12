@@ -29,8 +29,12 @@
   changed_when: false
 
 - name: Generate MySQL root password
+  command: openssl rand -base64 12
+  register: root_pass
+
+- name: Set the MySQL root password as a fact
   set_fact:
-    my_root_pass: "{{ lookup('ansible.builtin.shell', 'openssl rand -base64 12') }}"
+    my_root_pass: "{{ root_pass.stdout }}"
 
 - name: Install MySQL
   become: true
