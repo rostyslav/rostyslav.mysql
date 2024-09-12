@@ -39,7 +39,6 @@
 - name: Install MySQL
   become: true
   shell: |
-    echo -n {{my_root_pass}} > /root/mysql-root-password.txt
     echo "mysql-community-server mysql-community-server/root-pass password {{my_root_pass}}" | debconf-set-selections
     echo "mysql-community-server mysql-community-server/re-root-pass password {{my_root_pass}}" | debconf-set-selections
     apt-get install -y mysql-community-server
@@ -81,7 +80,7 @@
       [client]
       host     = 127.0.0.1
       user     = root
-      password = "{{ lookup('file', '/root/mysql-root-password.txt') }}"
+      password = "{{my_root_pass}}"
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
 
 - name: Debug output for user MySQL configuration location
