@@ -6,6 +6,7 @@
   when: ansible_distribution == 'Ubuntu'
 
 - name: Import Oracle MySQL GPG key
+  become: true
   command: |
     gpg --batch --yes --dearmor -o /usr/share/keyrings/mysql-apt-config.gpg /tmp/RPM-GPG-KEY-mysql-2023
   when: ansible_distribution == 'Ubuntu'
@@ -27,51 +28,14 @@
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
   changed_when: false
 
-- name: Check if file with generated MySQL password exists
-  become: true
-  stat:
-    path: /root/mysql-root-password.txt
-  register: mysql_root_password_check
-
-- name: Generate MySQL root password and save to file
+- name: Configure MySQL root password
   become: true
   shell: |
     PASSWORD=$(openssl rand -base64 12)
     echo -n $PASSWORD > /root/mysql-root-password.txt
-  args:
-    creates: /root/mysql-root-password.txt
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04' and not mysql_root_password_check.stat.exists
-
-- name: Read MySQL root password from file
-  become: true
-  slurp:
-    src: /root/mysql-root-password.txt
-  register: mysql_root_password_file
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
-
-- name: Read MySQL root password
-  become: true
-  slurp:
-    src: /root/mysql-root-password.txt
-  register: mysql_root_password_txt
-
-- name: Display MySQL root password
-  debug:
-    msg: "File content is: {{ mysql_root_password_txt.content | b64decode }}"
-
-- name: Configure MySQL root password
-  become: true
-  shell: |
-    echo "mysql-community-server mysql-community-server/root-pass password {{ mysql_root_password_txt.content | b64decode }}" | debconf-set-selections
-    echo "mysql-community-server mysql-community-server/re-root-pass password {{ mysql_root_password_txt.content | b64decode }}" | debconf-set-selections
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
-  changed_when: false
-
-- name: Install MySQL Server
-  become: true
-  apt:
-    name: mysql-community-server
-    state: present
+    echo "mysql-community-server mysql-community-server/root-pass password $PASSWORD" | debconf-set-selections
+    echo "mysql-community-server mysql-community-server/re-root-pass password $PASSWORD" | debconf-set-selections
+    apt-get install -y mysql-community-server
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
   changed_when: false
 
@@ -102,11 +66,6 @@
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
   changed_when: false
 
-- name: Debug output for user MySQL configuration location
-  become: true
-  debug:
-    msg: "{{ ansible_env.HOME }}/.my.cnf"
-
 - name: Configure MySQL for current user
   become: true
   copy:
@@ -115,8 +74,13 @@
       [client]
       host     = 127.0.0.1
       user     = root
-      password = "{{ mysql_root_password_file.content | b64decode}}"
+      password = "{{ lookup('file', '/root/mysql-root-password.txt') }}"
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
+
+- name: Debug output for user MySQL configuration location
+  become: true
+  debug:
+    msg: "{{ ansible_env.HOME }}/.my.cnf"
 
 - name: Ream MySQL configuration file
   become: true
