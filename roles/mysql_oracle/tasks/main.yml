@@ -67,6 +67,11 @@
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
   changed_when: false
 
+- name: Check if MySQL configuration file exists
+  stat:
+    path: "{{ ansible_env.HOME }}/.my.cnf"
+  register: my_cnf
+
 - name: Configure MySQL for current user
   become: true
   copy:
@@ -76,21 +81,5 @@
       host     = 127.0.0.1
       user     = root
       password = "{{my_root_pass}}"
-    creates: "{{ ansible_env.HOME }}/.my.cnf"
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04' and my_cnf.stat.exists == False
   changed_when: false
-
-- name: Debug output for user MySQL configuration location
-  become: true
-  debug:
-    msg: "{{ ansible_env.HOME }}/.my.cnf"
-
-- name: Ream MySQL configuration file
-  become: true
-  slurp:
-    src: "{{ ansible_env.HOME }}/.my.cnf"
-  register: mysql_cnf
-
-- name: Display MySQL configuration file
-  debug:
-    msg: "File content is: {{ mysql_cnf.content | b64decode }}"

@@ -24,7 +24,7 @@
       assert:
         that:
           - mysql_apt_config_gpg.stat.exists
-          -
+
     - name: Check if MySQL Oracle APT repository file exists
       stat:
         path: /etc/apt/sources.list.d/mysql.list
