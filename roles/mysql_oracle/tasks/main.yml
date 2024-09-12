@@ -31,10 +31,10 @@
 - name: Configure MySQL root password
   become: true
   shell: |
-    PASSWORD=$(openssl rand -base64 12)
-    echo -n $PASSWORD > /root/mysql-root-password.txt
-    echo "mysql-community-server mysql-community-server/root-pass password $PASSWORD" | debconf-set-selections
-    echo "mysql-community-server mysql-community-server/re-root-pass password $PASSWORD" | debconf-set-selections
+    MY_ROOT_PASS=$(openssl rand -base64 12)
+    echo -n $MY_ROOT_PASS > /root/mysql-root-password.txt
+    echo "mysql-community-server mysql-community-server/root-pass password $MY_ROOT_PASS" | debconf-set-selections
+    echo "mysql-community-server mysql-community-server/re-root-pass password $MY_ROOT_PASS" | debconf-set-selections
     apt-get install -y mysql-community-server
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
   changed_when: false
