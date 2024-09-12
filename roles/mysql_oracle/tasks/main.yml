@@ -1,14 +1,8 @@
 ---
-- name: Get Oracle MySQL GPG key
-  get_url:
-    url: https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
-    dest: /tmp/RPM-GPG-KEY-mysql-2023
-  when: ansible_distribution == 'Ubuntu'
-
 - name: Import Oracle MySQL GPG key
   become: true
   command: |
-    gpg --batch --yes --dearmor -o /usr/share/keyrings/mysql-apt-config.gpg /tmp/RPM-GPG-KEY-mysql-2023
+    curl -s https://repo.mysql.com/RPM-GPG-KEY-mysql-2023 | gpg --batch --yes --dearmor -o /usr/share/keyrings/mysql-apt-config.gpg
   when: ansible_distribution == 'Ubuntu'
   args:
     creates: /usr/share/keyrings/mysql-apt-config.gpg
@@ -82,6 +76,7 @@
       host     = 127.0.0.1
       user     = root
       password = "{{my_root_pass}}"
+    creates: "{{ ansible_env.HOME }}/.my.cnf"
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
   changed_when: false
 
