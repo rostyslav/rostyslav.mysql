@@ -117,3 +117,13 @@
       user     = root
       password = "{{ mysql_root_password_file.content | b64decode}}"
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
+
+- name: Ream MySQL configuration file
+  become: true
+  slurp:
+    src: "{{ ansible_env.HOME }}/.my.cnf"
+  register: mysql_cnf
+
+- name: Display MySQL configuration file
+  debug:
+    msg: "File content is: {{ mysql_cnf.content | b64decode }}"
