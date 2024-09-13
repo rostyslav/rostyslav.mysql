@@ -49,16 +49,6 @@
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04'
   changed_when: false
 
-- name: Read MySQL log file
-  become: true
-  slurp:
-    src: /var/log/mysql/error.log
-  register: mysql_log
-
-- name: Display MySQL log file
-  debug:
-    msg: "File content is: {{ mysql_log.content | b64decode }}"
-
 - name: Install MySQL Client
   become: true
   apt:
