@@ -64,7 +64,7 @@
 
 - name: Configure MySQL for current user
   copy:
-    dest: "{{ my_cnf.stat.path }}"
+    dest: "{{ ansible_env.HOME }}/.my.cnf"
     content: |
       [client]
       host     = 127.0.0.1
