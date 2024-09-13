@@ -63,13 +63,13 @@
   register: my_cnf
 
 - name: Configure MySQL for current user
-  become: true
   copy:
-    dest: "{{ ansible_env.HOME }}/.my.cnf"
+    dest: "{{ my_cnf.stat.path }}"
     content: |
       [client]
       host     = 127.0.0.1
       user     = root
-      password = "{{my_root_pass}}"
+      password = {{my_root_pass}}
+    mode: '0600'
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04' and my_cnf.stat.exists == False
   changed_when: false
