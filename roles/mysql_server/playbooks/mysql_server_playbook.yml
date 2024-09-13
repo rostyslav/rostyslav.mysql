@@ -5,5 +5,5 @@
   tasks:
     - name: Include MySQL Oracle role
       ansible.builtin.include_role:
-        name: rostyslav.mysql_oracle
+        name: rostyslav.mysql_server
         tasks_from: main.yml

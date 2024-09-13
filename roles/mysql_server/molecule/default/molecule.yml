@@ -9,6 +9,6 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    converge: ../playbooks/mysql_oracle_playbook.yml
+    converge: ../playbooks/mysql_server_playbook.yml
 verifier:
   name: ansible
