@@ -1,7 +1,7 @@
-Role Name
-=========
+MySQL collection for Ansible
+============================
 
-A brief description of the role goes here.
+This collection provides a set of roles to install and configure MySQL server on Debian-based and RedHat-based systems.
 
 Requirements
 ------------
