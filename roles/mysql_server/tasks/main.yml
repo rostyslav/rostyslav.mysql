@@ -1,9 +1,9 @@
 ---
-- name: Import Oracle MySQL GPG key
+- name: Import MySQL GPG key
   become: true
   shell: |
     curl -s {{ mysql_gpg_key_url }} | gpg --batch --yes --dearmor -o /usr/share/keyrings/mysql-apt-config.gpg
-  when: ansible_distribution == 'Ubuntu'
+  when: (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04') or (ansible_distribution == 'Debian' and ansible_distribution_version == '12')
   args:
     creates: /usr/share/keyrings/mysql-apt-config.gpg
 
