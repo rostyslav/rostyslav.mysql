@@ -21,7 +21,7 @@ ansible-galaxy collection build
 # Find the built tarball
 TARBALL=$(ls -t *.tar.gz | head -n 1)
 
-ansible-galaxy collection publish "$TARBALL" -vvvv
+ansible-galaxy collection publish "$TARBALL"
 
 # Tag the version in git and push the tag
 git tag $VERSION
