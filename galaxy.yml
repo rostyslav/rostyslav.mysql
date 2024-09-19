@@ -16,6 +16,8 @@ homepage: https://github.com/rostyslav/rostyslav.mysql
 issues: https://github.com/rostyslav/rostyslav.mysql/issues
 build_ignore:
   - .gitignore
+  - .idea
   - changelogs/.plugin-cache.yaml
   - '*.tar.gz'
   - publish.sh
+
