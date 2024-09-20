@@ -1,2 +1,3 @@
 ---
 mysql_gpg_key_url: https://repo.mysql.com/RPM-GPG-KEY-mysql-2023
+mysql_gpg_key_path: /usr/share/keyrings/apt-key-mysql-2023.gpg
