@@ -17,7 +17,7 @@
 
     - name: Check if MySQL Oracle keyring exists
       stat:
-        path: "{{ mysql_gpg_key_path }}"
+        path: /usr/share/keyrings/apt-key-mysql-2023.gpg
       register: mysql_apt_config_gpg
 
     - name: Assert that the MySQL Oracle keyring exists
