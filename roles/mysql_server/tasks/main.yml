@@ -7,6 +7,10 @@
   ansible.builtin.debug:
     msg: "Ansible distribution version is {{ ansible_distribution_version }}"
 
+- name: Display Ansible distribution major version
+  ansible.builtin.debug:
+    msg: "Ansible distribution version is {{ ansible_distribution_major_version }}"
+
 - name: Import MySQL GPG key
   become: true
   shell: |
