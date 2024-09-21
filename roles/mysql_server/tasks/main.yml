@@ -1,4 +1,12 @@
 ---
+- name: Display Ansible distribution
+  ansible.builtin.debug:
+    msg: "Ansible distribution is {{ ansible_distribution }}"
+
+- name: Display Ansible distribution version
+  ansible.builtin.debug:
+    msg: "Ansible distribution version is {{ ansible_distribution_version }}"
+
 - name: Import MySQL GPG key
   become: true
   shell: |
