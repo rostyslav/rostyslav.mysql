@@ -9,7 +9,11 @@ fi
 VERSION=$1
 
 # Update the version in galaxy.yml
-sed -i "s/^version:.*/version: $VERSION/" galaxy.yml
+if [[ "$(uname)" == "Darwin" ]]; then
+  sed -i '' "s/^version:.*/version: $VERSION/" galaxy.yml
+else
+  sed -i "s/^version:.*/version: $VERSION/" galaxy.yml
+fi
 
 git add galaxy.yml
 git commit -m "Update the version to $VERSION"
