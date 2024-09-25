@@ -34,4 +34,3 @@ git push --tags
 echo "Collection version $VERSION published to Ansible Galaxy and tagged in git."
 
 rm -f $TARBALL
-
