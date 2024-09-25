@@ -45,7 +45,7 @@
           - mysql_service.stdout == 'active'
 
     - name: Get MySQL version from log file
-      command: grep "ready for connections. Version:" /var/log/mysql/error.log | tail -1 | awk -F"'" '{print $2}'
+      shell: grep "ready for connections. Version:" /var/log/mysql/error.log | tail -1 | awk -F"'" '{print $2}'
       register: mysql_version
 
     - name: Assert that MySQL server version is 8.4.2
