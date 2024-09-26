@@ -1,2 +1,9 @@
----
-# tasks file for roles/mysql_client
+- name: Install MySQL Client
+  become: true
+  apt:
+    name: mysql-community-client
+    state: present
+  when: >
+    (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04') or
+    (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
+  changed_when: false
