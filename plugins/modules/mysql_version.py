@@ -1,3 +1,40 @@
+#!/usr/bin/python
+
+# -*- coding: utf-8 -*-
+# (c) 2024 Rostyslav Rava
+# MIT License
+
+DOCUMENTATION = '''
+---
+module: mysql_version
+short_description: Retrieve MySQL version
+description:
+  - This module connects to a MySQL server using credentials from ~/.my.cnf and retrieves the MySQL version.
+version_added: "1.0.17"
+author: "Rostyslav Rava"
+requirements:
+  - mysql-connector-python
+options: {}
+'''
+
+EXAMPLES = '''
+- name: Retrieve MySQL version
+  mysql_version:
+'''
+
+RETURN = '''
+version:
+  description: The MySQL version retrieved from the server.
+  type: str
+  returned: always
+  sample: '8.4.2'
+message:
+  description: A message indicating the result of the operation.
+  type: str
+  returned: always
+  sample: 'Successfully retrieved MySQL version'
+'''
+
 from ansible.module_utils.basic import AnsibleModule
 import mysql.connector
 from mysql.connector import Error
