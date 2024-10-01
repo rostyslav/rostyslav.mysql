@@ -1,7 +1,7 @@
-Role Name
+mysql_apt
 =========
 
-A brief description of the role goes here.
+This role configures MySQL APT repository for supported Debian-based distributions.
 
 Requirements
 ------------
@@ -16,16 +16,17 @@ A description of the settable variables for this role should go here, including 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role does not have any dependencies.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Usually this role is used as dependency for mysql_server and mysql_client roles. While might be used as standalone role as well.
 
     - hosts: servers
       roles:
-         - { role: rostyslav.mysql_apt, x: 42 }
+         - { role: rostyslav.mysql_apt }
+
 
 License
 -------
