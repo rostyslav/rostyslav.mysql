@@ -36,6 +36,7 @@ message:
 '''
 
 from ansible.module_utils.basic import AnsibleModule
+import os
 import mysql.connector
 from mysql.connector import Error
 
@@ -56,7 +57,7 @@ def run_module():
         module.exit_json(**result)
 
     try:
-        conn = mysql.connector.connect(option_files='~/.my.cnf')
+        conn = mysql.connector.connect(option_files=os.path.expanduser("~") + '/.my.cnf')
 
         if conn.is_connected():
             cursor = conn.cursor()
