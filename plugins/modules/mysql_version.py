@@ -7,7 +7,7 @@
 DOCUMENTATION = '''
 ---
 module: mysql_version
-short_description: Retrieve MySQL version
+short_description: Connects to MySQL server and retrieve MySQL version
 description:
   - This module connects to a MySQL server using credentials from ~/.my.cnf and retrieves the MySQL version.
 version_added: "1.0.17"
