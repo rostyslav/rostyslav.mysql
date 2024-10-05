@@ -8,9 +8,7 @@
 - name: Set the MySQL root password as a fact
   set_fact:
     my_root_pass: "{{ root_pass.stdout }}"
-  when: >
-    (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04') or 
-    (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
+  when: supported_distributions
 
 - name: Install MySQL Server
   become: true
@@ -18,9 +16,7 @@
     echo "mysql-community-server mysql-community-server/root-pass password {{my_root_pass}}" | debconf-set-selections
     echo "mysql-community-server mysql-community-server/re-root-pass password {{my_root_pass}}" | debconf-set-selections
     apt-get install -y mysql-community-server
-  when: >
-    (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04') or 
-    (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
+  when: supported_distributions
   changed_when: false
 
 - name: Start MySQL Server
@@ -29,9 +25,7 @@
     name: mysql
     state: started
     enabled: yes
-  when: >
-    (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04') or 
-    (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
+  when: supported_distributions
   changed_when: false
 
 - name: Check if MySQL configuration file exists
@@ -48,9 +42,5 @@
       user     = root
       password = {{my_root_pass}}
     mode: '0600'
-  when: >
-    (
-    (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04') or 
-    (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
-    ) and my_cnf.stat.exists == False
+  when: supported_distributions and my_cnf.stat.exists == False
   changed_when: false
