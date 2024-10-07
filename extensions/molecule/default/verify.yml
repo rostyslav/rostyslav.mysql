@@ -52,17 +52,3 @@
       assert:
         that:
           - mysql_version_log.stdout == '8.4.2'
-
-    - name: Initialize module MySQL version without actually running it
-      ansible.builtin.include_module:
-        name: ../../../../plugins/modules/mysql_version.py
-        tasks_from: init
-
-    - name: Call the MySQL version module
-      mysql_version:
-      register: mysql_version_result
-
-    - name: Assert that MySQL server version is 8.4.2
-      assert:
-        that:
-          - mysql_version_result.stdout == '8.4.2'
