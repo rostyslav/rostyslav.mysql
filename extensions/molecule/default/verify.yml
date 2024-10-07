@@ -46,9 +46,18 @@
 
     - name: Get MySQL version from log file
       shell: grep "ready for connections. Version:" /var/log/mysql/error.log | tail -1 | awk -F"'" '{print $2}'
-      register: mysql_version
+      register: mysql_version_log
 
     - name: Assert that MySQL server version is 8.4.2
       assert:
         that:
-          - mysql_version.stdout == '8.4.2'
+          - mysql_version_log.stdout == '8.4.2'
+
+    - name: Call the MySQL version module
+      rostyslav.mysql.mysql_version:
+      register: mysql_version_result
+
+    - name: Assert that MySQL server version is 8.4.2
+      assert:
+        that:
+          - mysql_version_result.stdout == '8.4.2'
