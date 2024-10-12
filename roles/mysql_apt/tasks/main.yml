@@ -15,11 +15,17 @@
   become: true
   shell: |
     curl -s {{ mysql_gpg_key_url }} | gpg --batch --yes --dearmor -o {{ mysql_gpg_key_path }}
-  when: >
-    (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04') or 
-    (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
+  when: supported_distributions
   args:
     creates: "{{ mysql_gpg_key_path }}"
+
+- name: Adding the MySQL APT Repository for Ubuntu 22.04
+  become: true
+  copy:
+    dest: /etc/apt/sources.list.d/mysql.list
+    content: |
+      deb [signed-by={{ mysql_gpg_key_path }}] https://repo.mysql.com/apt/ubuntu/ jammy mysql-8.4-lts
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '22.04'
 
 - name: Adding the MySQL APT Repository for Ubuntu 24.04
   become: true
@@ -41,7 +47,5 @@
   become: true
   apt:
     update_cache: yes
-  when: >
-    (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04') or 
-    (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
+  when: supported_distributions
   changed_when: false
