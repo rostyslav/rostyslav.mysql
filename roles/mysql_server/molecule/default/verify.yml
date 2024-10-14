@@ -1,0 +1,54 @@
+- name: Verify
+  hosts: localhost
+  tasks:
+
+    - name: Get current user name
+      ansible.builtin.command: whoami
+      register: current_user
+
+    - name: Display current user name
+      ansible.builtin.debug:
+        msg: "Current user is {{ current_user.stdout }}"
+
+    - name: Initialize role MySQL Server without actually running it
+      ansible.builtin.include_role:
+        name: ../../../../roles/mysql_server
+        tasks_from: init
+
+    - name: Check if MySQL APT keyring exists
+      stat:
+        path: /usr/share/keyrings/apt-key-mysql-2023.gpg
+      register: mysql_apt_config_gpg
+
+    - name: Assert that the MySQL APT keyring exists
+      assert:
+        that:
+          - mysql_apt_config_gpg.stat.exists
+
+    - name: Check if MySQL APT repository file exists
+      stat:
+        path: /etc/apt/sources.list.d/mysql.list
+      register: mysql_apt_repository
+
+    - name: Assert that the MySQL APT repository file exists
+      assert:
+        that:
+          - mysql_apt_repository.stat.exists
+
+    - name: Check if MySQL server is up and running
+      shell: systemctl is-active mysql
+      register: mysql_service
+
+    - name: Assert that MySQL server is active
+      assert:
+        that:
+          - mysql_service.stdout == 'active'
+
+    - name: Get MySQL version from log file
+      shell: grep "ready for connections. Version:" /var/log/mysql/error.log | tail -1 | awk -F"'" '{print $2}'
+      register: mysql_version_log
+
+    - name: Assert that MySQL server version is 8.4.2
+      assert:
+        that:
+          - mysql_version_log.stdout == '8.4.2'
