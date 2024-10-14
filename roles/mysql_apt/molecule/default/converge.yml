@@ -1,0 +1,9 @@
+---
+- name: Include MySQL APT role from the collection
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Testing MySQL APT role
+      ansible.builtin.include_role:
+        name: ../../../roles/mysql_apt
+        tasks_from: main.yml

@@ -1,0 +1,8 @@
+- name: Verify
+  hosts: localhost
+  tasks:
+
+    - name: Initialize role MySQL Server without actually running it
+      ansible.builtin.include_role:
+        name: ../../../../roles/mysql_client
+        tasks_from: init

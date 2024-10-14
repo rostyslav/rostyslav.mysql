@@ -1,0 +1,9 @@
+---
+- name: Test MySQL client role
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Include MySQL client role
+      ansible.builtin.include_role:
+        name: ../../../roles/mysql_client
+        tasks_from: main.yml
