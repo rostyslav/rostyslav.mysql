@@ -5,5 +5,5 @@
   tasks:
     - name: Include MySQL server role
       ansible.builtin.include_role:
-        name: rostyslav.mysql_server
+        name: ../../roles/mysql_server
         tasks_from: main.yml
