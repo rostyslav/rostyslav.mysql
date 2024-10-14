@@ -9,6 +9,6 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    converge: ../../playbooks/mysql_apt_playbook.yml
+    converge: ../../playbooks/mysql_client_playbook.yml
 verifier:
   name: ansible
