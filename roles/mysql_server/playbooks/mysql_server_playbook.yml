@@ -1,7 +1,7 @@
 ---
 - name: Test MySQL server role on Ubuntu 24.04
   hosts: localhost
-  gather_facts: false
+  gather_facts: true
   tasks:
     - name: Include MySQL server role
       ansible.builtin.include_role:
