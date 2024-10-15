@@ -1,0 +1,18 @@
+- name: Verify
+  hosts: localhost
+  tasks:
+
+    - name: Initialize role Percona APT without actually running it
+      ansible.builtin.include_role:
+        name: ../../../../roles/percona_apt
+        tasks_from: init
+
+    - name: Check that Percona APT repository file exists
+      stat:
+        path: /etc/apt/sources.list.d/percona-original-release.list
+      register: percona_apt_repository
+
+    - name: Assert that the Percona APT repository file exists
+      assert:
+        that:
+          - percona_apt_repository.stat.exists

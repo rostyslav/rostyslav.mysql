@@ -1,0 +1,9 @@
+---
+- name: Include Percona APT role from the collection
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Testing Percona APT role
+      ansible.builtin.include_role:
+        name: ../../../roles/percona_apt
+        tasks_from: main.yml
