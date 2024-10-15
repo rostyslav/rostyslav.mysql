@@ -17,6 +17,14 @@
   when: supported_distributions
   changed_when: false
 
+- name: Use percona-release to set up the repository for the Percona Server for MySQL
+  become: true
+  shell: |
+    percona-release enable-only ps-84-lts release
+    percona-release enable tools release
+  when: supported_distributions
+  changed_when: false
+
 - name: Update APT package index
   become: true
   apt:
