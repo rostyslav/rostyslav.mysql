@@ -1,2 +1,5 @@
 ---
-# vars file for roles/percona_apt
+supported_distributions: >
+    (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '22.04')
+    or (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04')
+    or (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
