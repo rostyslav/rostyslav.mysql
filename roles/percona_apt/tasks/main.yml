@@ -9,6 +9,12 @@
   args:
     creates: "/tmp/percona-release_latest.generic_all.deb"
 
+- name: Install the downloaded package
+  become: true
+  shell: |
+    cd /tmp
+    apt -y install ./percona-release_latest.generic_all.deb
+
 - name: Update APT package index
   become: true
   apt:
