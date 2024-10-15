@@ -1,0 +1,17 @@
+---
+
+- name: Download the percona-release repository package
+  become: true
+  shell: |
+    cd /tmp
+    curl -O https://repo.percona.com/apt/percona-release_latest.generic_all.deb
+  when: supported_distributions
+  args:
+    creates: "/tmp/percona-release_latest.generic_all.deb"
+
+- name: Update APT package index
+  become: true
+  apt:
+    update_cache: yes
+  when: supported_distributions
+  changed_when: false
