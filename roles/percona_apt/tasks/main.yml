@@ -14,6 +14,8 @@
   shell: |
     cd /tmp
     apt -y install ./percona-release_latest.generic_all.deb
+  when: supported_distributions
+  changed_when: false
 
 - name: Update APT package index
   become: true
