@@ -1,0 +1,47 @@
+---
+- name: Generate MySQL root password
+  command: openssl rand -base64 12
+  register: root_pass
+  when: supported_distributions
+  changed_when: false
+
+- name: Set the MySQL root password as a fact
+  set_fact:
+    my_root_pass: "{{ root_pass.stdout }}"
+  when: supported_distributions
+
+- name: Install Percona Server
+  become: true
+  shell: |
+    echo "percona-server-server percona-server-server/root-pass password {{my_root_pass}}" | debconf-set-selections
+    echo "percona-server-server percona-server-server/re-root-pass password {{my_root_pass}}" | debconf-set-selections
+    echo "percona-server-server percona-server-server/default-auth-override select Use Strong Password Encryption (RECOMMENDED)" | debconf-set-selections
+    apt-get install -y percona-server-server
+  when: supported_distributions
+  changed_when: false
+
+- name: Start MySQL Server
+  become: true
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+  when: supported_distributions
+  changed_when: false
+
+- name: Check if MySQL configuration file exists
+  stat:
+    path: "{{ ansible_env.HOME }}/.my.cnf"
+  register: my_cnf
+
+- name: Configure MySQL for current user
+  copy:
+    dest: "{{ ansible_env.HOME }}/.my.cnf"
+    content: |
+      [client]
+      host     = 127.0.0.1
+      user     = root
+      password = {{my_root_pass}}
+    mode: '0600'
+  when: supported_distributions and my_cnf.stat.exists == False
+  changed_when: false

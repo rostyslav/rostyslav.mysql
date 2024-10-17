@@ -1,0 +1,14 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: default
+platforms:
+  - name: instance
+    image: ubuntu:24.04
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../../playbooks/mysql_server_playbook.yml
+verifier:
+  name: ansible
