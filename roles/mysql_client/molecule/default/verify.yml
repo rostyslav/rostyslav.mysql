@@ -4,7 +4,5 @@
 
     - name: Initialize role MySQL Server without actually running it
       ansible.builtin.include_role:
-        vars_files:
-          - ../../../../vars/main.yml
         name: ../../../../roles/mysql_client
         tasks_from: init
