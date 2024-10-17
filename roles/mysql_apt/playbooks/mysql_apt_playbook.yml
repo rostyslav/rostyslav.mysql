@@ -5,4 +5,4 @@
   vars_files:
     - ../../group_vars/all.yml
   roles:
-    - rostyslav.mysql_apt
+    - ../../roles/mysql_apt
