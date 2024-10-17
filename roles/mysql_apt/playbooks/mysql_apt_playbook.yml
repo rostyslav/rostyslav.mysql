@@ -2,5 +2,7 @@
 - name: Test MySQL APT role on Ubuntu 24.04
   hosts: localhost
   gather_facts: true
+  vars_files:
+    - ../../group_vars/all.yml
   roles:
     - role: rostyslav.mysql_apt
