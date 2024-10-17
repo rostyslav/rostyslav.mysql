@@ -42,4 +42,3 @@ galaxy_info:
 dependencies:
   - role: percona_apt
     when: ansible_os_family == 'Debian'
-s
