@@ -2,8 +2,5 @@
 - name: Test MySQL APT role on Ubuntu 24.04
   hosts: localhost
   gather_facts: true
-  tasks:
-    - name: Include MySQL server role
-      ansible.builtin.include_role:
-        name: ../../../roles/mysql_apt
-        tasks_from: main.yml
+  roles:
+    - role: rostyslav.mysql_apt
