@@ -3,6 +3,6 @@
   hosts: localhost
   gather_facts: true
   vars_files:
-    - ../../group_vars/all.yml
+    - ../../../group_vars/all.yml
   roles:
     - ../../../roles/mysql_apt
