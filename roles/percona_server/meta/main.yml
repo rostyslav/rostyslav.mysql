@@ -25,5 +25,5 @@ galaxy_info:
     #       Maximum 20 tags per role.
 
 dependencies:
-  - role: mysql_apt
+  - role: percona_apt
     when: ansible_os_family == 'Debian'
