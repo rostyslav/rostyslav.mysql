@@ -1,0 +1,9 @@
+---
+- name: Test Percona Client role
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Include Percona Client role
+      ansible.builtin.include_role:
+        name: ../../../roles/percona_client
+        tasks_from: main.yml
