@@ -1,0 +1,8 @@
+- name: Verify
+  hosts: localhost
+  tasks:
+
+    - name: Initialize Percona Client role without actually running it
+      ansible.builtin.include_role:
+        name: ../../../../roles/percona_client
+        tasks_from: init
