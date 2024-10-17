@@ -12,7 +12,7 @@
 
     - name: Initialize role MySQL Server without actually running it
       ansible.builtin.include_role:
-        name: ../../../../roles/mysql_server
+        name: ../../../../roles/percona_server
         tasks_from: init
 
     - name: Check if MySQL APT keyring exists
