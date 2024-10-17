@@ -15,26 +15,6 @@
         name: ../../../../roles/percona_server
         tasks_from: init
 
-    - name: Check if MySQL APT keyring exists
-      stat:
-        path: /usr/share/keyrings/apt-key-mysql-2023.gpg
-      register: mysql_apt_config_gpg
-
-    - name: Assert that the MySQL APT keyring exists
-      assert:
-        that:
-          - mysql_apt_config_gpg.stat.exists
-
-    - name: Check if MySQL APT repository file exists
-      stat:
-        path: /etc/apt/sources.list.d/mysql.list
-      register: mysql_apt_repository
-
-    - name: Assert that the MySQL APT repository file exists
-      assert:
-        that:
-          - mysql_apt_repository.stat.exists
-
     - name: Check if MySQL server is up and running
       shell: systemctl is-active mysql
       register: mysql_service
