@@ -2,8 +2,6 @@
 - name: Test MySQL APT role on Ubuntu 24.04
   hosts: localhost
   gather_facts: true
-  vars_files:
-    - ../../../vars/main.yml
   tasks:
     - name: Include MySQL server role
       ansible.builtin.include_role:
