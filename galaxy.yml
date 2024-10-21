@@ -5,11 +5,12 @@ version: 1.0.22
 readme: README.md
 authors:
   - Rostyslav Rava
-description: MySQL Ansible Collection by Rostyslav Rava
+description: MySQL and Percona Server for MySQL Ansible Collection
 license_file: LICENSE
 tags:
   - database
   - mysql
+  - percona
 repository: https://github.com/rostyslav/rostyslav.mysql
 documentation: https://github.com/rostyslav/rostyslav.mysql
 homepage: https://github.com/rostyslav/rostyslav.mysql
