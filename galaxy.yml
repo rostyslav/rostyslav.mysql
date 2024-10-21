@@ -1,7 +1,7 @@
 ---
 namespace: rostyslav
 name: mysql
-version: 1.0.22
+version: 1.0.23
 readme: README.md
 authors:
   - Rostyslav Rava
