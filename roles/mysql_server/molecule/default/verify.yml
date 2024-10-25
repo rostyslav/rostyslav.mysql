@@ -52,3 +52,7 @@
       assert:
         that:
           - mysql_version_log.stdout == '8.4.3'
+
+    - name: Get MySQL version from MySQL client
+      rostyslav.mysql.mysql_version:
+      register: mysql_version_plugin
