@@ -44,7 +44,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install molecule ansible-lint
+        pip install molecule ansible-lint mysql-connector-python
 
     - name: Check Molecule version
       run: |
