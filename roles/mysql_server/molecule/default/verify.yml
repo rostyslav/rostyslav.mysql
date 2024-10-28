@@ -56,3 +56,7 @@
     - name: Get MySQL version from MySQL client
       rostyslav.mysql.mysql_version:
       register: mysql_version_plugin
+
+    - name: Debug output of MySQL version from MySQL client
+      ansible.builtin.debug:
+        msg: "MySQL version from MySQL client is {{ mysql_version_plugin.mysql_version }}"
