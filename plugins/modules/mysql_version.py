@@ -57,7 +57,7 @@ def run_module():
         module.exit_json(**result)
 
     try:
-        conn = mysql.connector.connect(option_files=os.path.expanduser("~") + '/.my.cnf')
+        conn = mysql.connector.connect(option_files=os.path.expanduser("~") + '/.my.cnf', option_groups=['client'])
 
         if conn.is_connected():
             cursor = conn.cursor()
