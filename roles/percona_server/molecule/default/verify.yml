@@ -36,3 +36,16 @@
       assert:
         that:
           - mysql_version_log.stdout == '8.4.0-1'
+
+    - name: Get version from client
+      rostyslav.mysql.mysql_version:
+      register: mysql_version_plugin
+
+    - name: Debug version output from client
+      ansible.builtin.debug:
+        msg: "Version from client is {{ mysql_version_plugin.version }}"
+
+    - name: Assert server version from client
+      assert:
+        that:
+          - mysql_version_log.stdout == '8.4.0-1'
