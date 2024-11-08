@@ -16,17 +16,17 @@ A description of the settable variables for this role should go here, including 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role depends on the `percona_apt` role to configure Percona APT repository for supported Debian-based distributions.
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - name: Install MySQL server from the official APT repository
+    - name: Install Percona Server for MySQL from APT repository
       hosts: standalone
       roles:
-         - { role: rostyslav.mysql.mysql_server, version: "8.4" }
+         - { role: rostyslav.mysql.percona_server }
 
 License
 -------
