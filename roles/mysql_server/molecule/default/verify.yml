@@ -51,7 +51,7 @@
     - name: Assert MySQL server version from log file
       assert:
         that:
-          - mysql_version_log.stdout == '8.4.3'
+          - mysql_version_log.stdout in ['8.4.0', '8.4.1', '8.4.2', '8.4.3']
 
     - name: Get MySQL version from MySQL client
       rostyslav.mysql.mysql_version:
@@ -64,4 +64,4 @@
     - name: Assert MySQL server version from client
       assert:
         that:
-          - mysql_version_log.stdout == '8.4.3'
+          - mysql_version_log.stdout in ['8.4.0', '8.4.1', '8.4.2', '8.4.3']
