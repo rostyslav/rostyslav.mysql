@@ -16,7 +16,7 @@
     echo "percona-server-server percona-server-server/root-pass password {{my_root_pass}}" | debconf-set-selections
     echo "percona-server-server percona-server-server/re-root-pass password {{my_root_pass}}" | debconf-set-selections
     echo "percona-server-server percona-server-server/default-auth-override select Use Strong Password Encryption (RECOMMENDED)" | debconf-set-selections
-    PERCONA_TELEMETRY_DISABLE=1
+    export PERCONA_TELEMETRY_DISABLE=1
     apt-get install -y percona-server-server
   when: supported_distributions and telemetry_disable
   changed_when: false
