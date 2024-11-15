@@ -14,11 +14,12 @@
   become: true
   shell: |
     export PERCONA_TELEMETRY_DISABLE=1
-    apt-mark hold percona-telemetry-agent
     echo "percona-server-server percona-server-server/root-pass password {{my_root_pass}}" | debconf-set-selections
     echo "percona-server-server percona-server-server/re-root-pass password {{my_root_pass}}" | debconf-set-selections
     echo "percona-server-server percona-server-server/default-auth-override select Use Strong Password Encryption (RECOMMENDED)" | debconf-set-selections
     apt-get install -y percona-server-server
+    systemctl stop percona-telemetry-agent
+    systemctl disable percona-telemetry-agent
   when: supported_distributions and telemetry_disable
   changed_when: false
 
