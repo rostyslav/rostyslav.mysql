@@ -27,6 +27,8 @@
     - name: Check if Percona telemetry agent service is running
       shell: systemctl is-enabled percona-telemetry-agent
       register: telemetry_service
+      failed_when: telemetry_status.rc not in [0, 1]
+      changed_when: false
 
     - name: Debug telemetry service status
       ansible.builtin.debug:
