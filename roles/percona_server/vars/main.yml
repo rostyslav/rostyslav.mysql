@@ -2,3 +2,4 @@
 supported_distributions: >
     (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '24.04')
     or (ansible_distribution == 'Debian' and ansible_distribution_major_version == '12')
+telemetry_disable: true
