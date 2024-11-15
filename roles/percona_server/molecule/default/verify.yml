@@ -28,6 +28,10 @@
       shell: systemctl is-enabled percona-telemetry-agent
       register: telemetry_service
 
+    - name: Debug telemetry service status
+      ansible.builtin.debug:
+        msg: "Telemetry service status is {{ telemetry_service.stdout }}"
+
     - name: Assert that Percona telemetry agent is not installed
       assert:
         that:
