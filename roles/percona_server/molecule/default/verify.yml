@@ -32,13 +32,6 @@
       assert:
         that:
           - telemetry_service.stdout == 'not-found'
-      when: telemetry_disable
-
-    - name: Assert that Percona telemetry agent is enabled
-      assert:
-        that:
-          - telemetry_service.stdout == 'enabled'
-      when: telemetry_disable == false
 
     - name: Get MySQL version from log file
       shell: grep "ready for connections. Version:" /var/log/mysql/error.log | tail -1 | awk -F"'" '{print $2}'
