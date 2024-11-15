@@ -25,7 +25,7 @@
           - mysql_service.stdout == 'active'
 
     - name: Check if Percona telemetry agent service is running
-      shell: systemctl is-enabled percona-telemetry-agent
+      shell: systemctl is-active percona-telemetry-agent
       register: telemetry_service
 
     - name: Debug telemetry service status
