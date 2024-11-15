@@ -37,7 +37,7 @@
     - name: Assert that Percona telemetry agent is not installed
       assert:
         that:
-          - telemetry_service.stdout == 'not-found'
+          - telemetry_service.stdout == 'disabled'
 
     - name: Get MySQL version from log file
       shell: grep "ready for connections. Version:" /var/log/mysql/error.log | tail -1 | awk -F"'" '{print $2}'
