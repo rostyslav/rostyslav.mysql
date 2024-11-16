@@ -1,7 +1,7 @@
-Role Name
-=========
+percona_server
+==============
 
-A brief description of the role goes here.
+Install Percona Server for MySQL.
 
 Requirements
 ------------
@@ -11,10 +11,11 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role.
 
-Disable percona telemetry.
+Disable Percona installation telemetry and telemetry agent by setting the `telemetry_disable`. Default value is `true`.
 
+For more information, see 
 [Telemetry on Percona Server for MySQL](https://docs.percona.com/percona-server/8.4/telemetry.html)
 
 Dependencies
