@@ -27,7 +27,6 @@ Usually this role is used as dependency for mysql_server and mysql_client roles.
       roles:
          - { role: rostyslav.mysql.mysql_apt }
 
-
 License
 -------
 
