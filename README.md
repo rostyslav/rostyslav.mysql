@@ -1,7 +1,7 @@
 MySQL collection for Ansible
 ============================
 
-This collection provides a set of roles to install and configure MySQL server on Debian-based and RedHat-based systems.
+This Ansible Collection offers a comprehensive set of roles to streamline the installation and configuration of MySQL or Percona Server for MySQL, catering to both client and server setups. The roles support a wide range of Debian-based and RedHat-based systems, ensuring flexibility and ease of use in diverse environments.
 
 Requirements
 ------------
