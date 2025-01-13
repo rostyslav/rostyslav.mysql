@@ -1,4 +1,6 @@
 - name: Verify
+  vars:
+    percona_versions: [ '8.4.0-1', '8.4.2-2', '8.4.3-3' ]
   hosts: localhost
   tasks:
 
@@ -50,7 +52,7 @@
     - name: Assert that MySQL server version is 8.4.0-1
       assert:
         that:
-          - mysql_version_log.stdout in ['8.4.0-1', '8.4.2-2', '8.4.3-3']
+          - mysql_version_log.stdout in percona.versions
 
     - name: Get version from client
       rostyslav.mysql.mysql_version:
@@ -63,4 +65,4 @@
     - name: Assert server version from client
       assert:
         that:
-          - mysql_version_log.stdout in ['8.4.0-1', '8.4.2-2', '8.4.3-3']
+          - mysql_version_log.stdout in percona.versions
