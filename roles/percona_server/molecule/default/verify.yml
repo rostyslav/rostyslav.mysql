@@ -65,4 +65,4 @@
     - name: Assert server version from client
       assert:
         that:
-          - mysql_version_plugin.stdout in percona_versions
+          - mysql_version_plugin.version in percona_versions
