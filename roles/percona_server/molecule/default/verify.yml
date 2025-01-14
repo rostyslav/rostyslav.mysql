@@ -12,7 +12,7 @@
       ansible.builtin.debug:
         msg: "Current user is {{ current_user.stdout }}"
 
-    - name: Initialize role MySQL Server without actually running it
+    - name: Initialize Percona Server role without actually running it
       ansible.builtin.include_role:
         name: ../../../../roles/percona_server
         tasks_from: init
@@ -41,18 +41,18 @@
         that:
           - telemetry_service.stdout == 'disabled'
 
-    - name: Get MySQL version from log file
+    - name: Get Percona version from log file
       shell: grep "ready for connections. Version:" /var/log/mysql/error.log | tail -1 | awk -F"'" '{print $2}'
-      register: mysql_version_log
+      register: percona_version_log
 
-    - name: Display MySQL version from log
+    - name: Display Percona version from log
       ansible.builtin.debug:
-        msg: "MySQL version from log is {{ mysql_version_log.stdout }}"
+        msg: "Server version from log: {{ percona_version_log.stdout }}"
 
-    - name: Assert that MySQL server version is 8.4.0-1
+    - name: Assert that server version is in the list of supported versions
       assert:
         that:
-          - mysql_version_log.stdout in percona_versions
+          - percona_version_log.stdout in percona_versions
 
     - name: Get version from client
       rostyslav.mysql.mysql_version:
@@ -60,7 +60,7 @@
 
     - name: Debug version output from client
       ansible.builtin.debug:
-        msg: "Version from client is {{ mysql_version_plugin.version }}"
+        msg: "Server version from client: {{ mysql_version_plugin.version }}"
 
     - name: Assert server version from client
       assert:
