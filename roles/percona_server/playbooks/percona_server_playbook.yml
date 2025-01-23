@@ -1,9 +1,9 @@
 ---
-- name: Test MySQL server role on Ubuntu 24.04
+- name: Test Percona Server role
   hosts: localhost
   gather_facts: true
   tasks:
-    - name: Include MySQL server role
+    - name: Include Percona Server role
       ansible.builtin.include_role:
         name: ../../../roles/percona_server
         tasks_from: main.yml
